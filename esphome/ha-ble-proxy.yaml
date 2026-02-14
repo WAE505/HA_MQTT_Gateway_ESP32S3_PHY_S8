@@ -58,13 +58,13 @@ ha_discovery:
   config_interval: 300
   state_interval: 10
 
-# M5Stack Atom S3 Lite RGB LED (GPIO35 — NeoPixel SK6812)
+# M5Stack Atom S3 Lite RGB LED (GPIO35 — SK6812 via RMT)
 light:
-  - platform: neopixelbus
+  - platform: esp32_rmt_led_strip
     id: status_led
     name: "Status LED"
-    type: GRB
-    variant: SK6812
+    rgb_order: GRB
+    chipset: SK6812
     pin: GPIO35
     num_leds: 1
     default_transition_length: 0s
