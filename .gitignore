@@ -8,6 +8,10 @@ esphome/secrets.yaml
 __pycache__/
 *.pyc
 
+# Logs
+*.log
+device_logs.txt
+
 # IDE
 .vscode/
 .idea/
