@@ -128,9 +128,18 @@ The main config is in `esphome/ha-ble-proxy.yaml`. Key parameters:
 ## Hardware
 
 Tested on **M5Stack Atom S3 Lite** (ESP32-S3):
-- Status LED: GPIO35
+- Status LED: GPIO35 (NeoPixel SK6812 RGB)
 - Button: GPIO41 (hold 10s for reboot)
 - USB-C for flashing and serial monitor (USB_SERIAL_JTAG)
+
+### Status LED
+
+The built-in RGB LED indicates gateway health:
+
+| Pattern | Meaning |
+|---------|---------|
+| Slow pulsing green | WiFi and MQTT connected — operating normally |
+| Flashing red | WiFi or MQTT disconnected |
 
 ## License
 
