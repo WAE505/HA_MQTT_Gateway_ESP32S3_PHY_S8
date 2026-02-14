@@ -1,0 +1,13 @@
+# ESPHome build output
+.esphome/
+
+# Secrets (contains WiFi/MQTT credentials)
+esphome/secrets.yaml
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
