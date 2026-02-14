@@ -68,7 +68,46 @@ light:
     pin: GPIO35
     num_leds: 1
     default_transition_length: 0s
-    effects: []
+    effects:
+      - pulse:
+          name: "Pulse Green"
+          transition_length: 1.5s
+          update_interval: 1.5s
+          min_brightness: 5%
+          max_brightness: 40%
+      - strobe:
+          name: "Flash Red"
+          colors:
+            - state: true
+              brightness: 60%
+              red: 100%
+              green: 0%
+              blue: 0%
+              duration: 250ms
+            - state: false
+              duration: 250ms
+
+# Check WiFi + MQTT status every 5s and update LED
+interval:
+  - interval: 5s
+    then:
+      - lambda: |-
+          static uint8_t last_state = 0;  // 0=unknown, 1=error, 2=ok
+          bool wifi_ok = wifi::global_wifi_component->is_connected();
+          bool mqtt_ok = mqtt::global_mqtt_client->is_connected();
+          uint8_t state = (wifi_ok && mqtt_ok) ? 2 : 1;
+          if (state == last_state) return;
+          last_state = state;
+          auto call = id(status_led).turn_on();
+          if (state == 2) {
+            // Connected — slow pulsing green
+            call.set_rgb(0.0f, 1.0f, 0.0f);
+            call.set_effect("Pulse Green");
+          } else {
+            // Disconnected — flashing red
+            call.set_effect("Flash Red");
+          }
+          call.perform();
 
 # M5Stack Atom S3 Lite button (GPIO41) — factory reset
 binary_sensor:
