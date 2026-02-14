@@ -1,6 +1,7 @@
 #pragma once
 
 #include "esphome/core/component.h"
+#include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 #include "esphome/components/mqtt/mqtt_client.h"
 #include "esphome/components/ble_ext_scanner/ble_ext_scanner.h"
